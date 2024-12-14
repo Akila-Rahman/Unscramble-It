@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unscramble It!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        #game-container {
+            margin: 50px auto;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: #fff;
+        }
+        #scrambled-word {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1rem;
+            width: 80%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #feedback {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+        #score {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        #hint {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #777;
+        }
+        #difficulty {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unscramble It!</h1>
+    <div id="game-container">
+        <div id="difficulty">
+            <label for="difficulty-select">Choose difficulty: </label>
+            <select id="difficulty-select" onchange="changeDifficulty()">
+                <option value="panda">Panda (Easy)</option>
+                <option value="horse">Horse (Intermediate)</option>
+                <option value="tiger">Tiger (Pro)</option>
+            </select>
+        </div>
+        <div id="scrambled-word">--</div>
+        <input type="text" id="user-input" placeholder="Your guess...">
+        <br>
+        <button onclick="checkAnswer()">Submit</button>
+        <div id="feedback"></div>
+        <div id="score">Score: 0</div>
+        <div id="hint"></div>
+    </div>
+
+    <script>
+        const wordPools = {
+            panda: ["cat", "dog", "sun", "tree", "book"],
+            horse: ["flower", "planet", "bridge", "rabbit", "jungle"],
+            tiger: ["javascript", "developer", "function", "variable", "framework"]
+        };
+
+        let currentWord = "";
+        let scrambledWord = "";
+        let score = 0;
+        let currentDifficulty = "panda";
+
+        function shuffleWord(word) {
+            return word.split('').sort(() => Math.random() - 0.5).join('');
+        }
+
+        function generateWord() {
+            const words = wordPools[currentDifficulty];
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            scrambledWord = shuffleWord(currentWord);
+            document.getElementById('scrambled-word').textContent = scrambledWord;
+            document.getElementById('user-input').value = "";
+            document.getElementById('feedback').textContent = "";
+            document.getElementById('hint').textContent = "Hint: " + currentWord[0] + "...";
+        }
+
+        function checkAnswer() {
+            const userGuess = document.getElementById('user-input').value.trim().toLowerCase();
+            if (userGuess === currentWord) {
+                document.getElementById('feedback').textContent = "Correct! 🎉";
+                score++;
+            } else {
+                document.getElementById('feedback').textContent = `Wrong! The correct word was "${currentWord}".`;
+                score--;
+            }
+            document.getElementById('score').textContent = `Score: ${score}`;
+            setTimeout(generateWord, 2000);
+        }
+
+        function changeDifficulty() {
+            currentDifficulty = document.getElementById('difficulty-select').value;
+            score = 0; // Reset score on difficulty change
+            document.getElementById('score').textContent = `Score: ${score}`;
+            generateWord();
+        }
+
+        // Initialize the game
+        generateWord();
+    </script>
+</body>
+</html>
