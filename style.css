@@ -1,0 +1,73 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: 	#FF69B4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+color:#ffffff;
+        }
+        #game-container {
+            margin: 50px auto;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: #fff;
+        }
+#round-name{
+font-weight: bold;
+color:#e21b70;
+}
+        #round-image {
+            width: 150px;
+            height: auto;
+            margin: 20px auto;
+        }
+        #scrambled-word {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1rem;
+            width: 80%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e21b70;
+            color: white;
+        }
+        button:hover {
+            background-color: #FFB6C1;
+        }
+        #feedback {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+        #score {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        #hint {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #777;
+        }
+        #winner-image {
+            display: none;
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+        }
